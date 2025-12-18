@@ -1,0 +1,31 @@
+{% extends "kitchen/base.html" %}
+
+{% block title %}
+{{ dish.name }}
+{% endblock %}
+
+{% block content %}
+  <h2>{{ dish.name }}</h2>
+
+  <p><strong>Type:</strong> {{ dish.dish_type.name }}</p>
+  <p><strong>Price:</strong> ${{ dish.price }}</p>
+
+  <p>
+    <strong>Cooked by:</strong>
+    {% with cooks=dish.cooks.all %}
+      {% if cooks %}
+        {{ cooks|join:", " }}
+      {% else %}
+        No cooks assigned.
+      {% endif %}
+    {% endwith %}
+  </p>
+
+  {% if dish.description %}
+    <p><strong>Description:</strong> {{ dish.description }}</p>
+  {% endif %}
+
+  <p>
+    <a href="{% url 'dish-list' %}">← Back to dishes</a>
+  </p>
+{% endblock %}
