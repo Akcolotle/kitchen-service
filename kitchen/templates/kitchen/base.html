@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Kitchen Service{% endblock %}</title>
+</head>
+<body>
+
+  <header>
+    <h1>Restaurant Kitchen Service</h1>
+    <nav>
+      <a href="{% url 'dish-list' %}">Dishes</a>
+    </nav>
+    <hr>
+  </header>
+
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+
+</body>
+</html>

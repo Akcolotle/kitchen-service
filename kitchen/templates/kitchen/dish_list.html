@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Kitchen Dishes</title>
-</head>
-<body>
-  <h1>Dishes</h1>
+{% extends "kitchen/base.html" %}
+
+{% block title %}
+Kitchen Dishes
+{% endblock %}
+
+{% block content %}
+  <h2>Dishes</h2>
+
   {% if dish_list %}
     <ul>
       {% for dish in dish_list %}
         <li>
           <strong>{{ dish.name }}</strong>
           — {{ dish.dish_type.name }} — ${{ dish.price }}
+
           <div>
             <em>Cooked by:</em>
             {% with cooks=dish.cooks.all %}
@@ -22,6 +24,7 @@
               {% endif %}
             {% endwith %}
           </div>
+
           {% if dish.description %}
             <p>{{ dish.description }}</p>
           {% endif %}
@@ -31,5 +34,4 @@
   {% else %}
     <p>No dishes available.</p>
   {% endif %}
-</body>
-</html>
+{% endblock %}
