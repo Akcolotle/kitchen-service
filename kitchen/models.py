@@ -8,6 +8,10 @@ class Cook(AbstractUser):
     def __str__(self) -> str:
         return self.username
 
+    class Meta:
+        verbose_name = "Cook"
+        verbose_name_plural = "Cooks"
+
 
 class DishType(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -32,6 +36,8 @@ class Dish(models.Model):
 
     class Meta:
         ordering = ["name"]
+        verbose_name = "Dish"
+        verbose_name_plural = "Dishes"
 
     def __str__(self) -> str:
         return self.name
