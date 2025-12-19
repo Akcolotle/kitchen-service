@@ -1,3 +1,7 @@
+{% extends "kitchen/base.html" %}
+
+{% block content %}
+
 {% if perms.kitchen.can_manage_dishes %}
   <p>
     <a href="{% url 'dish-create' %}">➕ Create dish</a>
@@ -31,3 +35,5 @@
     </li>
   {% endfor %}
 </ul>
+
+{% endblock %}

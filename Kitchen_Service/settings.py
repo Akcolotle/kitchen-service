@@ -116,7 +116,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -125,3 +125,7 @@ AUTH_USER_MODEL = "kitchen.Cook"
 LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/dishes/"
 LOGOUT_REDIRECT_URL = "/accounts/login/"
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
