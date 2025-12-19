@@ -1,36 +1,45 @@
 {% extends "kitchen/base.html" %}
 
 {% block title %}
-{{ dish.name }}
+  {{ dish.name }}
 {% endblock %}
 
 {% block content %}
-<h2>{{ dish.name }}</h2>
+  <h2>{{ dish.name }}</h2>
 
-<p>
-  <strong>Type:</strong> {{ dish.dish_type.name }}
-</p>
+  <p>
+    <strong>Type:</strong> {{ dish.dish_type.name }}
+  </p>
 
-<p>
-  <strong>Price:</strong> ${{ dish.price }}
-</p>
+  <p>
+    <strong>Price:</strong> ${{ dish.price }}
+  </p>
 
-<p>
-  <strong>Cooked by:</strong>
-  {% for cook in dish.cooks.all %}
-    {{ cook }}{% if not forloop.last %}, {% endif %}
-  {% empty %}
-    No cooks assigned.
-  {% endfor %}
-</p>
+  <p>
+    <strong>Cooked by:</strong>
+    {% for cook in dish.cooks.all %}
+      {{ cook }}{% if not forloop.last %}, {% endif %}
+    {% empty %}
+      No cooks assigned.
+    {% endfor %}
+  </p>
 
-{% if dish.description %}
-<p>
-  <strong>Description:</strong> {{ dish.description }}
-</p>
-{% endif %}
+  {% if dish.description %}
+    <p>
+      <strong>Description:</strong> {{ dish.description }}
+    </p>
+  {% endif %}
 
-<p>
-  <a href="{% url 'dish-list' %}">← Back to dishes</a>
-</p>
+  {% if perms.kitchen.can_manage_dishes %}
+    <hr>
+    <p>
+      <a href="{% url 'dish-update' dish.pk %}">✏️ Edit</a>
+      |
+      <a href="{% url 'dish-delete' dish.pk %}">🗑️ Delete</a>
+    </p>
+  {% endif %}
+
+  <p>
+    <a href="{% url 'dish-list' %}">← Back to dishes</a>
+  </p>
 {% endblock %}

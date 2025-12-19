@@ -1,25 +1,33 @@
-{% for dish in dish_list %}
-<li>
-  <strong>
-    <a href="{% url 'dish-detail' dish.pk %}">
-      {{ dish.name }}
-    </a>
-  </strong>
-  — {{ dish.dish_type.name }} — ${{ dish.price }}
+{% if perms.kitchen.can_manage_dishes %}
+  <p>
+    <a href="{% url 'dish-create' %}">➕ Create dish</a>
+  </p>
+{% endif %}
 
-  <div>
-    <em>Cooked by:</em>
-    {% with cooks=dish.cooks.all %}
-      {% if cooks %}
-        {{ cooks|join:", " }}
-      {% else %}
-        No cooks assigned.
+<ul>
+  {% for dish in dish_list %}
+    <li>
+      <strong>
+        <a href="{% url 'dish-detail' dish.pk %}">
+          {{ dish.name }}
+        </a>
+      </strong>
+      — {{ dish.dish_type.name }} — ${{ dish.price }}
+
+      <div>
+        <em>Cooked by:</em>
+        {% with cooks=dish.cooks.all %}
+          {% if cooks %}
+            {{ cooks|join:", " }}
+          {% else %}
+            No cooks assigned.
+          {% endif %}
+        {% endwith %}
+      </div>
+
+      {% if dish.description %}
+        <p>{{ dish.description }}</p>
       {% endif %}
-    {% endwith %}
-  </div>
-
-  {% if dish.description %}
-    <p>{{ dish.description }}</p>
-  {% endif %}
-</li>
-{% endfor %}
+    </li>
+  {% endfor %}
+</ul>
