@@ -1,6 +1,12 @@
-from django.shortcuts import render
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+)
 
 from kitchen.models import Dish
 
@@ -16,3 +22,26 @@ class DishDetailView(LoginRequiredMixin, DetailView):
     model = Dish
     template_name = "kitchen/dish_detail.html"
     context_object_name = "dish"
+
+
+class DishCreateView(PermissionRequiredMixin, CreateView):
+    model = Dish
+    fields = ["name", "description", "price", "dish_type", "cooks"]
+    template_name = "kitchen/dish_form.html"
+    success_url = reverse_lazy("dish-list")
+    permission_required = "kitchen.can_manage_dishes"
+
+
+class DishUpdateView(PermissionRequiredMixin, UpdateView):
+    model = Dish
+    fields = ["name", "description", "price", "dish_type", "cooks"]
+    template_name = "kitchen/dish_form.html"
+    success_url = reverse_lazy("dish-list")
+    permission_required = "kitchen.can_manage_dishes"
+
+
+class DishDeleteView(PermissionRequiredMixin, DeleteView):
+    model = Dish
+    template_name = "kitchen/dish_confirm_delete.html"
+    success_url = reverse_lazy("dish-list")
+    permission_required = "kitchen.can_manage_dishes"

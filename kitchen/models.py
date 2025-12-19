@@ -38,6 +38,9 @@ class Dish(models.Model):
         ordering = ["name"]
         verbose_name = "Dish"
         verbose_name_plural = "Dishes"
+        permissions = [
+            ("can_manage_dishes", "Can create, update and delete dishes"),
+        ]
 
     def __str__(self) -> str:
         return self.name
