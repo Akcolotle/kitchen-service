@@ -5,27 +5,32 @@
 {% endblock %}
 
 {% block content %}
-  <h2>{{ dish.name }}</h2>
+<h2>{{ dish.name }}</h2>
 
-  <p><strong>Type:</strong> {{ dish.dish_type.name }}</p>
-  <p><strong>Price:</strong> ${{ dish.price }}</p>
+<p>
+  <strong>Type:</strong> {{ dish.dish_type.name }}
+</p>
 
-  <p>
-    <strong>Cooked by:</strong>
-    {% with cooks=dish.cooks.all %}
-      {% if cooks %}
-        {{ cooks|join:", " }}
-      {% else %}
-        No cooks assigned.
-      {% endif %}
-    {% endwith %}
-  </p>
+<p>
+  <strong>Price:</strong> ${{ dish.price }}
+</p>
 
-  {% if dish.description %}
-    <p><strong>Description:</strong> {{ dish.description }}</p>
-  {% endif %}
+<p>
+  <strong>Cooked by:</strong>
+  {% for cook in dish.cooks.all %}
+    {{ cook }}{% if not forloop.last %}, {% endif %}
+  {% empty %}
+    No cooks assigned.
+  {% endfor %}
+</p>
 
-  <p>
-    <a href="{% url 'dish-list' %}">← Back to dishes</a>
-  </p>
+{% if dish.description %}
+<p>
+  <strong>Description:</strong> {{ dish.description }}
+</p>
+{% endif %}
+
+<p>
+  <a href="{% url 'dish-list' %}">← Back to dishes</a>
+</p>
 {% endblock %}

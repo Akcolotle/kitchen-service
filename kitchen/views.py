@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView
 
 from kitchen.models import Dish
@@ -12,7 +12,7 @@ class DishListView(ListView):
     context_object_name = "dish_list"
 
 
-class DishDetailView(DetailView):
+class DishDetailView(LoginRequiredMixin, DetailView):
     model = Dish
     template_name = "kitchen/dish_detail.html"
     context_object_name = "dish"
