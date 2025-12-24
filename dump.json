@@ -1,0 +1,169 @@
+[
+{
+    "model": "kitchen.cook",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$44HlU5xFcbHzKF43IMg387$tCv+QhJwiQyxXJefwR75dBWRw+BZYqy6CjdUdCSpVfw=",
+        "last_login": "2025-12-23T23:48:11.433Z",
+        "is_superuser": true,
+        "username": "Chef",
+        "first_name": "",
+        "last_name": "",
+        "email": "artemp2208@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-12-18T13:51:07Z",
+        "years_of_experience": 0,
+        "groups": [],
+        "user_permissions": [
+            33
+        ]
+    }
+},
+{
+    "model": "kitchen.cook",
+    "pk": 2,
+    "fields": {
+        "password": "akcel2-2-0-8",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "Vlad_chef",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-12-18T13:59:29Z",
+        "years_of_experience": 4,
+        "groups": [],
+        "user_permissions": [
+            33
+        ]
+    }
+},
+{
+    "model": "kitchen.cook",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$ChdobdYinidHAaYmQVsIUf$UGjf0W0e6j6Ht72z7JZn2KOKpONp1cc9B/PE+YcHl/I=",
+        "last_login": null,
+        "is_superuser": true,
+        "username": "Ilya",
+        "first_name": "",
+        "last_name": "",
+        "email": "Chefotboga@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-12-23T22:18:38.779Z",
+        "years_of_experience": 0,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "kitchen.dishtype",
+    "pk": 1,
+    "fields": {
+        "name": "Soup"
+    }
+},
+{
+    "model": "kitchen.dishtype",
+    "pk": 2,
+    "fields": {
+        "name": "Salad"
+    }
+},
+{
+    "model": "kitchen.dishtype",
+    "pk": 3,
+    "fields": {
+        "name": "Dessert"
+    }
+},
+{
+    "model": "kitchen.dishtype",
+    "pk": 4,
+    "fields": {
+        "name": "Drink"
+    }
+},
+{
+    "model": "kitchen.dish",
+    "pk": 1,
+    "fields": {
+        "name": "Borch",
+        "description": "",
+        "price": "10.00",
+        "dish_type": 1,
+        "cooks": [
+            2
+        ]
+    }
+},
+{
+    "model": "kitchen.dish",
+    "pk": 2,
+    "fields": {
+        "name": "Cheese soup",
+        "description": "",
+        "price": "5.25",
+        "dish_type": 1,
+        "cooks": [
+            1
+        ]
+    }
+},
+{
+    "model": "kitchen.dish",
+    "pk": 3,
+    "fields": {
+        "name": "Mushroom Cream Soup",
+        "description": "",
+        "price": "21453.00",
+        "dish_type": 1,
+        "cooks": [
+            1
+        ]
+    }
+},
+{
+    "model": "kitchen.dish",
+    "pk": 4,
+    "fields": {
+        "name": "Caesar Salad",
+        "description": "",
+        "price": "3.22",
+        "dish_type": 2,
+        "cooks": [
+            2
+        ]
+    }
+},
+{
+    "model": "kitchen.dish",
+    "pk": 5,
+    "fields": {
+        "name": "Greek Salad",
+        "description": "",
+        "price": "321.00",
+        "dish_type": 2,
+        "cooks": [
+            2
+        ]
+    }
+},
+{
+    "model": "kitchen.dish",
+    "pk": 6,
+    "fields": {
+        "name": "Olivier Salad",
+        "description": "",
+        "price": "222.00",
+        "dish_type": 2,
+        "cooks": [
+            2
+        ]
+    }
+}
+]
