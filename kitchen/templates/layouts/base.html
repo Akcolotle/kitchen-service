@@ -55,11 +55,18 @@
                         <li class="nav-item">
                             <span class="nav-link">{{ user.username }}</span>
                         </li>
+
                         <li class="nav-item">
                             <form method="post" action="{% url 'logout' %}">
                                 {% csrf_token %}
-                                <button class="btn btn-link nav-link">Logout</button>
+                                <button type="submit" class="btn btn-link nav-link p-0">Logout</button>
                             </form>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">
+                                <i class="fas fa-sign-in-alt mr-1"></i> Login
+                            </a>
                         </li>
                     {% endif %}
                 </ul>
