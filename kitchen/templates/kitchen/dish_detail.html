@@ -1,45 +1,61 @@
-{% extends "kitchen/base.html" %}
+{% extends "layouts/base.html" %}
 
 {% block title %}
   {{ dish.name }}
 {% endblock %}
 
 {% block content %}
-  <h2>{{ dish.name }}</h2>
 
-  <p>
-    <strong>Type:</strong> {{ dish.dish_type.name }}
-  </p>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">{{ dish.name }}</h1>
 
-  <p>
-    <strong>Price:</strong> ${{ dish.price }}
-  </p>
+    <div>
+        <a href="{% url 'dish-list' %}" class="btn btn-secondary btn-sm">
+            ← Back
+        </a>
 
-  <p>
-    <strong>Cooked by:</strong>
-    {% for cook in dish.cooks.all %}
-      {{ cook }}{% if not forloop.last %}, {% endif %}
-    {% empty %}
-      No cooks assigned.
-    {% endfor %}
-  </p>
+        {% if perms.kitchen.can_manage_dishes %}
+            <a href="{% url 'dish-update' dish.pk %}" class="btn btn-warning btn-sm">
+                Edit
+            </a>
+            <a href="{% url 'dish-delete' dish.pk %}" class="btn btn-danger btn-sm">
+                Delete
+            </a>
+        {% endif %}
+    </div>
+</div>
 
-  {% if dish.description %}
-    <p>
-      <strong>Description:</strong> {{ dish.description }}
-    </p>
-  {% endif %}
+<div class="card shadow mb-4">
+    <div class="card-body">
 
-  {% if perms.kitchen.can_manage_dishes %}
-    <hr>
-    <p>
-      <a href="{% url 'dish-update' dish.pk %}">✏️ Edit</a>
-      |
-      <a href="{% url 'dish-delete' dish.pk %}">🗑️ Delete</a>
-    </p>
-  {% endif %}
+        <p>
+            <strong>Type:</strong>
+            {{ dish.dish_type.name }}
+        </p>
 
-  <p>
-    <a href="{% url 'dish-list' %}">← Back to dishes</a>
-  </p>
+        <p>
+            <strong>Price:</strong>
+            ${{ dish.price }}
+        </p>
+
+        <p>
+            <strong>Cooks:</strong>
+            {% for cook in dish.cooks.all %}
+                {{ cook }}{% if not forloop.last %}, {% endif %}
+            {% empty %}
+                <span class="text-muted">No cooks assigned</span>
+            {% endfor %}
+        </p>
+
+        {% if dish.description %}
+            <hr>
+            <p>
+                <strong>Description:</strong><br>
+                {{ dish.description }}
+            </p>
+        {% endif %}
+
+    </div>
+</div>
+
 {% endblock %}

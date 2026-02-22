@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Kitchen Service{% endblock %}</title>
+
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet">
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+<div id="wrapper">
+
+    <!-- SIDEBAR -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion">
+
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'dish-list' %}">
+            <div class="sidebar-brand-text mx-3">Kitchen Service</div>
+        </a>
+
+        <hr class="sidebar-divider my-0">
+
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'dish-list' %}">
+                <i class="fas fa-utensils"></i>
+                <span>Dishes</span>
+            </a>
+        </li>
+
+        {% if perms.kitchen.can_manage_dishes %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'dish-create' %}">
+                <i class="fas fa-plus"></i>
+                <span>Create dish</span>
+            </a>
+        </li>
+        {% endif %}
+
+        <hr class="sidebar-divider">
+    </ul>
+    <!-- END SIDEBAR -->
+
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+
+            <!-- TOPBAR -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 shadow">
+
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <span class="nav-link">{{ user.username }}</span>
+                        </li>
+
+                        <li class="nav-item">
+                            <form method="post" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-link nav-link p-0">Logout</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                                <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link" href="{% url 'register' %}">Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+
+            </nav>
+
+            <!-- PAGE CONTENT -->
+            <div class="container-fluid">
+                {% block content %}{% endblock %}
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto text-center">
+                <span>© Kitchen Service</span>
+            </div>
+        </footer>
+
+    </div>
+</div>
+
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+
+</body>
+</html>

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
+from django.core.validators import MinValueValidator
 
 class Cook(AbstractUser):
     years_of_experience = models.PositiveSmallIntegerField(default=0)
@@ -26,7 +26,11 @@ class DishType(models.Model):
 class Dish(models.Model):
     name = models.CharField(max_length=255, unique=True)
     description = models.TextField(blank=True)
-    price = models.DecimalField(max_digits=8, decimal_places=2)
+    price = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
+        validators=[MinValueValidator(0)]
+    )
     dish_type = models.ForeignKey(
         DishType,
         on_delete=models.CASCADE,

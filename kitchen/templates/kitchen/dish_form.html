@@ -1,4 +1,4 @@
-{% extends "kitchen/base.html" %}
+{% extends "layouts/base.html" %}
 
 {% block title %}
   {% if object %}
@@ -9,28 +9,51 @@
 {% endblock %}
 
 {% block content %}
-  <h2>
-    {% if object %}
-      Edit dish
-    {% else %}
-      Create dish
-    {% endif %}
-  </h2>
 
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">
+        {% if object %}Edit dish{% else %}Create dish{% endif %}
+    </h1>
 
-    <button type="submit">
-      {% if object %}
-        Update
-      {% else %}
-        Create
-      {% endif %}
-    </button>
-  </form>
+    <a href="{% url 'dish-list' %}" class="btn btn-secondary btn-sm">
+        ← Back to dishes
+    </a>
+</div>
 
-  <p>
-    <a href="{% url 'dish-list' %}">← Back to dishes</a>
-  </p>
+<div class="card shadow mb-4">
+    <div class="card-body">
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+
+                    {{ field }}
+
+                    {% if field.errors %}
+                        <div class="text-danger small mt-1">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">
+                    {% if object %}Update{% else %}Create{% endif %}
+                </button>
+
+                <a href="{% url 'dish-list' %}" class="btn btn-outline-secondary ml-2">
+                    Cancel
+                </a>
+            </div>
+        </form>
+
+    </div>
+</div>
+
 {% endblock %}
