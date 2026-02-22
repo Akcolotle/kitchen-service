@@ -9,7 +9,7 @@ from django.views.generic import (
 )
 
 from kitchen.models import Dish
-from kitchen.forms import DishForm
+from kitchen.forms import DishForm, UserRegisterForm
 
 class DishListView(ListView):
     model = Dish
@@ -45,3 +45,9 @@ class DishDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     template_name = "kitchen/dish_confirm_delete.html"
     success_url = reverse_lazy("dish-list")
     permission_required = "kitchen.can_manage_dishes"
+
+
+class RegisterView(CreateView):
+    form_class = UserRegisterForm
+    template_name = "registration/register.html"
+    success_url = reverse_lazy("login")
